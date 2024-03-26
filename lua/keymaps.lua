@@ -1,4 +1,3 @@
-
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
 vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
@@ -17,7 +16,12 @@ vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagn
 vim.keymap.set("n", "<leader><leader>x", "<Cmd>source %<CR>", { desc = "source current file" })
 
 -- Open floating diagnostic window
-vim.keymap.set("n", "<leader>i", ":lua vim.diagnostic.open_float(nil, {focus=false, scope=\"cursor\"})<CR>", { desc = "Open floating diagnostic window", silent = true })
+vim.keymap.set(
+  "n",
+  "<leader>i",
+  ':lua vim.diagnostic.open_float(nil, {focus=false, scope="cursor"})<CR>',
+  { desc = "Open floating diagnostic window", silent = true }
+)
 
 -- Change the crazy default terminal escape keymap to esc
 vim.keymap.set("t", "<esc>", "<C-\\><C-n>", { silent = true })

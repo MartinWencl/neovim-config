@@ -1,3 +1,6 @@
+# Guarding the elusive OpenAI API key
+secret.sh
+
 # Compiled Lua sources
 luac.out
 

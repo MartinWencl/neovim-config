@@ -1,6 +1,5 @@
 require "lib.env"
 
--- Sets the correct encoding for these files
 -- cp1250 encoding for .pas, .dfm, .proj, .dproj 
 -- NOTE: Reopens the file with the correct encodinga
 vim.api.nvim_create_autocmd("BufReadPost", {
@@ -9,19 +8,22 @@ vim.api.nvim_create_autocmd("BufReadPost", {
   callback = function ()
     local bufnr = vim.api.nvim_get_current_buf()
     vim.api.nvim_buf_call(bufnr, function ()
+      -- Reopens the files with correct encoding
       vim.cmd("edit! ++enc=cp1250")
     end)
   end
 })
 
--- Searching trough project notes
-local path_to_notes = vim.fn.expand("~") .. "/Notes/work/projects"
-vim.api.nvim_create_user_command("DEKSearchNote", function () require("telescope.builtin").find_files({ search_dirs = { path_to_notes } }) end, {})
+
+
+-- Searching through project notes
+local notes_directory_path = vim.fn.expand("~") .. "/Notes/work/projects"
+vim.api.nvim_create_user_command("DEKSearchNote", function () require("telescope.builtin").find_files({ search_dirs = { notes_directory_path } }) end, {})
 
 -- DEKSearch
 -- Paths to search in
-local path_to_repo = "/mnt/c/Vyvoj/Projekty-developer/ripgrep/"
-local excluded = { ".svn", "Zdroje", "zzzDCU", "zzzHelp" }
+local ripgrep_repo_path = "/mnt/c/Vyvoj/Projekty-developer/ripgrep/"
+local excluded_directories = { ".svn", "Zdroje", "zzzDCU", "zzzHelp" }
 
 --- Function that returns a list of directories, from a given path, while excluding given directory names
 ---@param path string given path to repo, using linux conventions
@@ -49,9 +51,9 @@ on_dir_select = function(item, lnum)
   if item == nil then return end
 
   if mode == "live_grep" then
-    require("telescope.builtin").live_grep({ cwd = path_to_repo .. item, file_format = "cp1250" })
+    require("telescope.builtin").live_grep({ cwd = ripgrep_repo_path .. item, file_format = "cp1250" })
   elseif mode == "find_files" then
-    require("telescope.builtin").find_files({ cwd = path_to_repo .. item, file_format = "cp1250" })
+    require("telescope.builtin").find_files({ cwd = ripgrep_repo_path .. item, file_format = "cp1250" })
   else
     vim.notify("Telescope mode not recognized or implemented!", vim.log.levels.ERROR)
   end
@@ -69,7 +71,7 @@ local select_dir_to_search = function()
     return
   end
 
-  local dirs = get_repo_directories(path_to_repo, excluded)
+  local dirs = get_repo_directories(ripgrep_repo_path, excluded_directories)
 
   vim.ui.select(dirs, { prompt = "Select a folder: " }, on_dir_select)
 end
@@ -100,15 +102,15 @@ local new_ita = function()
     local workspace_name = "work"
     local workspace_path = dirman.get_workspace(workspace_name)
     local projects_folder = "projects/"
-    local ita_folder = "ITA-" .. id
+    local ita_folder_name = "ITA-" .. id
     local template = vim.split(
       [[
 @document.meta
-title: ]] .. " " .. ita_folder .. "\n" .. [[
+title: ]] .. " " .. ita_folder_name .. "\n" .. [[
 authors: martinw
 categories: ITA
 @end ]]
-      .. "\n\n" .. "* " .. ita_folder .. "\n\n" ..
+      .. "\n\n" .. "* " .. ita_folder_name .. "\n\n" ..
     [[
 ** Zadání:
    - zde vypsat (ideálně v bodech) o čem v projektu jde
@@ -122,8 +124,8 @@ categories: ITA
       , "\n")
 
     -- Creates the ITA dir and index file
-    vim.fn.mkdir(workspace_path .. "/" .. projects_folder .. ita_folder)
-    dirman.create_file(projects_folder .. ita_folder .. "/" .. "index.norg", workspace_name)
+    vim.fn.mkdir(workspace_path .. "/" .. projects_folder .. ita_folder_name)
+    dirman.create_file(projects_folder .. ita_folder_name .. "/" .. "index.norg", workspace_name)
 
     -- Writes the template to the new index file
     local bufnr = vim.api.nvim_get_current_buf()
