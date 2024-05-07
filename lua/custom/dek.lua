@@ -17,7 +17,7 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 
 
 -- Searching through project notes
-local notes_directory_path = vim.fn.expand("~") .. "/Notes/work/projects"
+local notes_directory_path = vim.fn.expand("~") .. "/Notes/projects"
 vim.api.nvim_create_user_command("DEKSearchNote", function () require("telescope.builtin").find_files({ search_dirs = { notes_directory_path } }) end, {})
 
 -- DEKSearch
@@ -99,7 +99,7 @@ local new_ita = function()
       return
     end
 
-    local workspace_name = "work"
+    local workspace_name = "main"
     local workspace_path = dirman.get_workspace(workspace_name)
     local projects_folder = "projects/"
     local ita_folder_name = "ITA-" .. id
@@ -120,6 +120,22 @@ categories: ITA
 
 ** TODO:
    - (?) zamysli se nad prací a vypiš základní kroky 
+
+** DEK:
+*** Ke Kontrole
+   - (-) Zkompiluje
+   - (-) Zkontrolován diff
+   - (?) Napsán mail nebo zpráva
+   - (?) Update dokumentace
+
+*** K Testu
+   - (-) Napsána poznámka programátora
+
+*** Ke Commitu
+   - (-) Zkompiluje
+   - (-) Zkontrolován diff
+   - (-) Napsán mail s moduly a skripty
+   - (-) Napsána commit message
     ]]
       , "\n")
 

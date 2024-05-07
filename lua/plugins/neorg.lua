@@ -2,22 +2,25 @@
 return {
     'nvim-neorg/neorg',
     build = ':Neorg sync-parsers',
-    dependencies = { { 'nvim-lua/plenary.nvim' }, { 'nvim-neorg/neorg-telescope' } },
+    dependencies = {
+        { 'nvim-lua/plenary.nvim' },
+        { 'nvim-neorg/neorg-telescope' },
+        { dir = '~/projects/projector'}
+    },
     config = function()
         require('neorg').setup {
             load = {
-                ['core.defaults'] = {}, -- Loads default behaviour
+                ['core.defaults'] = {},  -- Loads default behaviour
                 ['core.concealer'] = {}, -- Adds pretty icons to your documents
                 -- TODO: Completion
-                -- ["core.completion"] = { -- Adds completion
-                -- engine = "nvim-cmp",
-                -- name = "neorg"
+                -- ["core.completion"] = {  -- Adds completion
+                --     engine = "nvim-cmp",
+                --     name = "neorg"
                 -- },
                 ['core.dirman'] = { -- Manages Neorg workspaces
                     config = {
                         workspaces = {
-                            work = '~/Notes/work',
-                            home = '~/Notes/home',
+                            main = '~/Notes/',
                         },
                     },
                 },
@@ -27,6 +30,7 @@ return {
                 ['core.summary'] = {},
                 ['core.esupports.hop'] = {},
                 ['core.mode'] = {},
+                ['external.projector'] = {},
             },
         }
 
@@ -46,8 +50,7 @@ return {
         }
 
         -- Workspaces
-        vim.keymap.set('n', '<leader>nww', '<Cmd>Neorg workspace work<CR>', { desc = '[w]ork' })
-        vim.keymap.set('n', '<leader>nwh', '<Cmd>Neorg workspace home<CR>', { desc = '[h]ome' })
+        vim.keymap.set('n', '<leader>nw', '<Cmd>Neorg workspace main<CR>', { desc = '[w]ork' })
 
         -- iterate trough workspaces
         local switch_modes = function()
@@ -70,8 +73,14 @@ return {
         end
         vim.keymap.set('n', '<leader>ns', switch_modes, { desc = '[s]witch mode' })
 
+        local read_mode = function()
+            local mode_module = require("neorg").modules.get_module("core.mode")
+            local mode = mode_module.add_mode("links-follow")
+        end
+
         -- Go to index
         vim.keymap.set('n', '<leader>ni', '<Cmd>Neorg index<CR>', { desc = 'goto [i]ndex' })
+        vim.keymap.set('n', '<leader>nt', read_mode, { desc = 'goto [i]ndex' })
 
         -- Insert links
         vim.keymap.set('n', '<leader>nl', '<Cmd>Telescope neorg insert_link<CR>', { desc = 'insert [l]ink' })
@@ -88,6 +97,8 @@ return {
 }
 
 -- NOTE: Initial luarocks config
+-- neorg plans to move to luarocks in the future, this is the first iteration.
+-- TODO: Move neorg to luarocks once it is the preferred way
 -- return {
 --     {
 --         "vhyrro/luarocks.nvim",
