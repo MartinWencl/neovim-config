@@ -24,7 +24,6 @@ local plugins = require("plugins.init_plugins")
 table.insert(plugins, { import = "plugins" })
 
 require("lazy").setup(plugins, {})
--- require("/home/martinw/Documents/lua/plugins/gptapi")
 
 -- Load basic keymaps not related to specific plugins
 require("keymaps")

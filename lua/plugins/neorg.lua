@@ -5,16 +5,14 @@ return {
     dependencies = {
         { 'nvim-lua/plenary.nvim' },
         { 'nvim-neorg/neorg-telescope' },
-        { dir = '~/projects/projector'}
     },
     config = function()
         require('neorg').setup {
             load = {
                 ['core.defaults'] = {},  -- Loads default behaviour
                 ['core.concealer'] = {}, -- Adds pretty icons to your documents
-                -- TODO: Completion
                 -- ["core.completion"] = {  -- Adds completion
-                --     engine = "nvim-cmp",
+                --     engine = "cmp",
                 --     name = "neorg"
                 -- },
                 ['core.dirman'] = { -- Manages Neorg workspaces
@@ -30,7 +28,6 @@ return {
                 ['core.summary'] = {},
                 ['core.esupports.hop'] = {},
                 ['core.mode'] = {},
-                ['external.projector'] = {},
             },
         }
 
@@ -95,28 +92,3 @@ return {
         vim.wo.conceallevel = 2
     end,
 }
-
--- NOTE: Initial luarocks config
--- neorg plans to move to luarocks in the future, this is the first iteration.
--- TODO: Move neorg to luarocks once it is the preferred way
--- return {
---     {
---         "vhyrro/luarocks.nvim",
---         branch = "more-fixes",
---         config = function()
---             require("luarocks").setup({})
---         end,
---     },
---     {
---         "nvim-neorg/neorg",
---         branch = "luarocks",
---         dependencies = { "luarocks.nvim" },
---         config = function()
---             require("neorg").setup({
---                 load = {
---                     ["core.defaults"] = {},
---                 }
---             })
---         end
---     }
--- }

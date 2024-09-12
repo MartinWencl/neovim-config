@@ -1,11 +1,3 @@
-local enable_ai = function()
-    -- if vim.g.is_code_private() then
-    --     return false
-    -- end
-    return true
-    -- return true
-end
-
 return {
     -- https://github.com/jackMort/ChatGPT.nvim
     {
@@ -21,11 +13,11 @@ return {
                 api_key_cmd = "/home/martinw/.config/nvim/secret.sh",
                 actions_paths = {},
                 openai_params = {
-                    model = "gpt-4",
+                    model = "gpt-4o",
                     max_tokens = 4000,
                 },
                 openai_edit_params = {
-                    model = "gpt-3.5-turbo",
+                    model = "gpt-4o",
                     max_tokens = 4000,
                     temperature = 0,
                     top_p = 1,
