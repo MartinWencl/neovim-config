@@ -1,8 +1,8 @@
 require "lib.treesitter"
 -- Imbedded SQL formatting for csharp
 -- works specificaly with DEKLib
--- TODO: Fix
--- -> looks like the formatting itself is broken, check text before/after, load into python repl
+
+-- FIX: looks like the formatting itself is broken, check text before/after, load into python repl
 local sql_query = vim.treesitter.query.parse(
   "c_sharp",
   [[

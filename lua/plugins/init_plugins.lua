@@ -128,7 +128,8 @@ return {
                 return "<Ignore>"
             end, { expr = true, desc = "Jump to previous hunk" })
 
-            -- TODO: Fix - keybinds don"t work currently
+            -- FIX: keybinds don't work currently
+
             -- Actions
             -- visual mode
             map("v", "<leader>hs", function()
@@ -195,16 +196,16 @@ return {
     },
 
     -- Add indentation guides even on blank lines
-    -- {
-    -- "lukas-reineke/indent-blankline.nvim",
+    {
+    "lukas-reineke/indent-blankline.nvim",
     -- Enable `lukas-reineke/indent-blankline.nvim`
     -- See `:help ibl`
-    -- main = "ibl",
-    -- opts = {},
-    -- config = function()
-    -- require("ibl").setup()
-    -- end
-    -- },
+    main = "ibl",
+    opts = {},
+    config = function()
+    require("ibl").setup()
+    end
+    },
     -- Add easy commenting
     { "numToStr/Comment.nvim", opts = {} },
 }

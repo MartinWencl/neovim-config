@@ -2,11 +2,15 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+-- TODO: set shada
+
 -- Sets EOL char
 vim.opt.list = true
 vim.opt.listchars = {
   eol = "󰌑"
 }
+
+-- vim.opt.inccommand = "split"
 
 -- Sets spelling
 vim.opt.spelllang = {"en_us", "cs"}

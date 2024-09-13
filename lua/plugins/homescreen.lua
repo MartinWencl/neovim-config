@@ -6,7 +6,7 @@ return {
     local alpha = require 'alpha'
     local dashboard = require 'alpha.themes.startify'
 
-    -- NOTE: too big :(
+    -- NOTE2: too big :(
     -- maybe remove some of the file options in the future, now it displays files in the current project/dir
     -- and also last used files. It's quite a lot of files and clutter
     -- Should be able to do something like this to customize

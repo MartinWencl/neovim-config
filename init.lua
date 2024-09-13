@@ -15,6 +15,8 @@ if not vim.loop.fs_stat(lazypath) then
     })
 end
 
+-- adding lazy to runtimepath
+-- :h :runtime
 vim.opt.rtp:prepend(lazypath)
 
 -- Loads some basic plugins
@@ -23,7 +25,11 @@ local plugins = require("plugins.init_plugins")
 -- Set the lua/plugins/ as the import dir for additional plugins
 table.insert(plugins, { import = "plugins" })
 
-require("lazy").setup(plugins, {})
+require("lazy").setup(plugins, {
+    change_detection = {
+        notify = false,
+    },
+})
 -- require("/home/martinw/Documents/lua/plugins/gptapi")
 
 -- Load basic keymaps not related to specific plugins
@@ -31,4 +37,5 @@ require("keymaps")
 
 -- Load custom files
 require("custom.dek")
+require("custom.delphi")
 require("custom.terminals")

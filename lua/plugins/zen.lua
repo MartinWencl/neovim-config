@@ -70,4 +70,3 @@ return {
     vim.keymap.set("n", "<leader>z", "<Cmd>ZenMode<CR>", { desc = "[z]en mode", silent = true })
   end
 }
-
