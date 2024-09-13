@@ -1,11 +1,3 @@
-local enable_ai = function()
-    -- if vim.g.is_code_private() then
-    --     return false
-    -- end
-    return true
-    -- return true
-end
-
 return {
     -- https://github.com/jackMort/ChatGPT.nvim
     {

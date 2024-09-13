@@ -3,27 +3,32 @@
 return {
     "nvim-neorg/neorg",
     dependencies = {
-        { "nvim-lua/plenary.nvim" },
-        { "nvim-neorg/neorg-telescope" },
-        { "luarocks.nvim" },
+        { 'nvim-lua/plenary.nvim' },
+        { 'nvim-neorg/neorg-telescope' },
     },
     version = "*",
     config = function()
         require("neorg").setup({
             load = {
-                ["core.defaults"] = {},  -- Loads default behaviour
-                ["core.concealer"] = {}, -- Adds pretty icons to your documents
-                ["core.dirman"] = {      -- Manages Neorg workspaces
+                ['core.defaults'] = {},  -- Loads default behaviour
+                ['core.concealer'] = {}, -- Adds pretty icons to your documents
+                -- ["core.completion"] = {  -- Adds completion
+                --     engine = "cmp",
+                --     name = "neorg"
+                -- },
+                ['core.dirman'] = { -- Manages Neorg workspaces
                     config = {
                         workspaces = {
                             main = "~/notes/",
                         },
                     },
                 },
-                ["core.integrations.treesitter"] = {},
-                ["core.export"] = {},
-                ["core.integrations.telescope"] = {},
-                ["core.summary"] = {},
+                ['core.integrations.treesitter'] = {},
+                ['core.export'] = {},
+                ['core.integrations.telescope'] = {},
+                ['core.summary'] = {},
+                ['core.esupports.hop'] = {},
+                -- ['core.mode'] = {},
             },
         })
 

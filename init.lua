@@ -30,7 +30,6 @@ require("lazy").setup(plugins, {
         notify = false,
     },
 })
--- require("/home/martinw/Documents/lua/plugins/gptapi")
 
 -- Load basic keymaps not related to specific plugins
 require("keymaps")
